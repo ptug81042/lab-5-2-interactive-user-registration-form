@@ -9,3 +9,11 @@ const usernameErrorMessage = document.getElementById('usernameError');
 const emailErrorMessage = document.getElementById('emailError');
 const passwordErrorMessage = document.getElementById('passwordError');
 const confirmPasswordErrorMessage = document.getElementById('confirmPasswordError');
+
+/* 2. Load saved username from localStorage on page load */
+window.addEventListener('DOMContentLoaded', () => {
+    const savedUsername = localStorage.getItem('savedUsername');
+    if (savedUsername) {
+        usernameInput.value = savedUsername;
+    }
+});
