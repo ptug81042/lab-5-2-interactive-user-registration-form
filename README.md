@@ -11,12 +11,12 @@
 
 3. Explain how you used localStorage to persist and retrieve the username. What are the limitations of localStorage for storing sensitive data?  
    **Answer:**  
-   I used `localStorage.setItem('savedUsername', username)` to save the username after successful registration, and retrieved it with `localStorage.getItem('savedUsername')` on page load to pre-fill the username field. However, localStorage is not secure—data is stored in plain text and accessible via JavaScript, so it should never be used for sensitive information like passwords or personal data.
+   I used `localStorage.setItem('savedUsername', username)` to save the username after successful registration, and retrieved it with `localStorage.getItem('savedUsername')` on page load to pre-fill the username field. I also stored an array of all registered usernames in localStorage to check for uniqueness. However, localStorage is not secure—data is stored in plain text and accessible via JavaScript, so it should never be used for sensitive information like passwords or personal data.
 
 4. Describe a challenge you faced in implementing the real-time validation and how you solved it.  
    **Answer:**  
-   A challenge was ensuring that error messages updated immediately as the user typed, especially for the confirm password field, which depends on the password field's value. I solved this by adding input event listeners to both fields and calling the confirm password validation function whenever either field changed, ensuring accurate, real-time feedback.
+   A challenge was ensuring that error messages updated immediately as the user typed, especially for the confirm password field, which depends on the password field's value. I solved this by adding input event listeners to both fields and calling the confirm password validation function whenever either field changed, ensuring accurate, real-time feedback. Another challenge was implementing username uniqueness, which I solved by maintaining a list of registered usernames in localStorage.
 
 5. How did you ensure that custom error messages were user-friendly and displayed at the appropriate times?  
    **Answer:**  
-   I wrote clear, specific error messages for each validation rule and displayed them in dedicated `<span>` elements below each input. The messages appeared only when the input was invalid and were cleared as soon as the input became valid, providing immediate and relevant feedback without overwhelming the user.
+   I wrote clear, specific error messages for each validation rule and displayed them in dedicated `<span>` elements below each input. The messages appeared only when the input was invalid and were cleared as soon as the input became valid, providing immediate and relevant feedback without overwhelming the user. For username uniqueness, I provided a specific message if the username was already taken.
