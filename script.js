@@ -88,3 +88,33 @@ function validateConfirmPasswordField() {
     confirmPasswordErrorMessage.textContent = '';
     return true;
 }
+
+/* 5. Form submission: prevent default, validate, show messages, save username, reset if valid */
+registrationForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    
+    const isUsernameValid = validateUsernameField();
+    const isEmailValid = validateEmailField();
+    const isPasswordValid = validatePasswordField();
+    const isConfirmPasswordValid = validateConfirmPasswordField();
+
+    if (isUsernameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid) {
+        localStorage.setItem('savedUsername', usernameInput.value);
+        alert('Registration successful!');
+        registrationForm.reset();
+        usernameErrorMessage.textContent = '';
+        emailErrorMessage.textContent = '';
+        passwordErrorMessage.textContent = '';
+        confirmPasswordErrorMessage.textContent = '';
+    } else {
+        if (!isUsernameValid) {
+            usernameInput.focus();
+        } else if (!isEmailValid) {
+            emailInput.focus();
+        } else if (!isPasswordValid) {
+            emailInput.focus();
+        } else if (!isConfirmPasswordValid) {
+            confirmPasswordInput.focus();
+        }
+    }
+});
