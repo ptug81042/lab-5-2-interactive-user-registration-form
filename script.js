@@ -17,3 +17,12 @@ window.addEventListener('DOMContentLoaded', () => {
         usernameInput.value = savedUsername;
     }
 });
+
+/* 3. Real-time validation: Add input event listeners to each field */
+usernameInput.addEventListener('input', validUserbaneField);
+emailInput.addEventListener('input', validEmailField);
+passwordInput.addEventListener('input', () => {
+    validatePasswordField();
+    validateConfirmPasswordField(); // Also check confirm password if password changes
+});
+confirmPasswordInput.addEventListener('input', validateConfirmPasswordField);
