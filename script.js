@@ -26,3 +26,65 @@ passwordInput.addEventListener('input', () => {
     validateConfirmPasswordField(); // Also check confirm password if password changes
 });
 confirmPasswordInput.addEventListener('input', validateConfirmPasswordField);
+
+/* 4. Validation functions using Constraint Validation API and custom logic */
+function validateUsernameField() {
+    if (usernameInput.validity.valueMissing) {
+        usernameErrorMessage.textContent = 'Username is required';
+        return false;
+    }
+    usernameErrorMessage.textContent = '';
+    return true;
+}
+
+function validateEmailField() {
+    if (emailInput.validity.valueMissing) {
+        emailErrorMessage.textContent = 'Email is required.';
+        return false;
+    }
+    if (emailInput.validity.typeMismatch) {
+        emailErrorMessage.textContent = 'Please enter a valid email address.';
+        return false;
+    }
+    emailErrorMessage.textContent = '';
+    return true;
+}
+
+function validatePasswordField() {
+    const passwordValue = passwordInput.value;
+    if (passwordInput.validity.valueMissing) {
+        passwordErrorMessage.textContent = 'Password is required.';
+        return false;
+    }
+    if (passwordValue.length < 8) {
+        passwordErrorMessage.textContent = 'Password must be at least 8 characters long.';
+        return false;
+    }
+    if (!/[A-Z]/.test(passwordValue)) {
+        passwordErrorMessage.textContent = 'Password must include an uppercase letter';
+        return false;
+    }
+    if (!/[a-z]/.test(passwordValue)) {
+        passwordErrorMessage.textContent = 'Password must include a lowercase letter.';
+        return false;
+    }
+    if (!/[0-9]/.test(passwordValue)) {
+        passwordErrorMessage.textContent = 'Password must include a number';
+        return false;
+    }
+    passwordErrorMessage.textContent = '';
+    return true;
+}
+
+function validateConfirmPasswordField() {
+    if (confirmPasswordInput.validity.valueMissing) {
+        confirmPasswordErrorMessage.textContent = 'Please confirm your password.';
+        return false;
+    }
+    if (confirmPasswordInput.value !== passwordInput.value) {
+        confirmPasswordErrorMessage.textContent = 'Passwords do not match.';
+        return false;
+    }
+    confirmPasswordErrorMessage.textContent = '';
+    return true;
+}
